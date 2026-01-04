@@ -46,28 +46,49 @@ npm run build
 npm run preview
 ```
 
-## Deployment to Cloudflare Workers
+## Deployment to Cloudflare Pages (Recommended)
 
-### First Time Setup
+### CI/CD Setup with GitHub
+
+1. **Connect Repository to Cloudflare Pages:**
+   - Go to [Cloudflare Dashboard](https://dash.cloudflare.com/)
+   - Navigate to **Workers & Pages** > **Create Application** > **Pages**
+   - Click **Connect to Git** and select your GitHub repository
+   - Repository: `fstab50/invest-collective-site`
+
+2. **Configure Build Settings:**
+   ```
+   Production branch:       develop
+   Build command:           npx @cloudflare/next-on-pages@1
+   Build output directory:  .vercel/output/static
+   Framework preset:        Next.js
+   ```
+
+3. **Set Environment Variables:**
+   Add these in Cloudflare Pages settings:
+   ```
+   NODE_VERSION=20
+   NEXT_PUBLIC_WEB3FORMS_KEY=your_web3forms_access_key
+   ```
+
+4. **Deploy:**
+   - Click "Save and Deploy"
+   - Cloudflare will automatically build and deploy on every push to `develop` branch
+   - Your site will be available at `*.pages.dev`
+
+### Manual Deployment (Alternative)
+
+For manual deployments using Wrangler:
 
 1. **Login to Cloudflare:**
    ```bash
    npx wrangler login
    ```
 
-2. **Get your Account ID:**
+2. **Deploy:**
    ```bash
-   npx wrangler whoami
+   npm run deploy
    ```
-
-3. **Add Account ID to wrangler.jsonc:**
-   Update the `account_id` field in `wrangler.jsonc` with your Cloudflare account ID.
-
-### Deploy
-
-```bash
-npm run deploy
-```
 
 The site will be deployed to `invest-collective-site.workers.dev` (or your custom domain).
 

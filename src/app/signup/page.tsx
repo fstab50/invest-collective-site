@@ -41,7 +41,7 @@ export default function SignupPage() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          access_key: '646715cb-7883-4f01-b624-002d1cee543f', // You'll need to replace this
+          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY || '646715cb-7883-4f01-b624-002d1cee543f',
           subject: 'New Invest Collective Application',
           from_name: formData.name,
           ...formData,
