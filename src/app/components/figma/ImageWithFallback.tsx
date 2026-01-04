@@ -47,7 +47,6 @@ export function ImageWithFallback({
       className={className}
       style={style}
       onError={handleError}
-      unoptimized
     />
   );
 }

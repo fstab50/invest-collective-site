@@ -55,8 +55,8 @@ export default function Page() {
             </div>
             <div className="relative">
               <ImageWithFallback
-                src="https://images.unsplash.com/photo-1666249245520-eb1f564dc421?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxob21lJTIwb2ZmaWNlJTIwZGVzayUyMHNldHVwfGVufDF8fHx8MTc2NzU1MTc3N3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
-                alt="Individual investor home office"
+                src="/images/hero-business-meeting.jpg"
+                alt="Group discussion"
                 className="rounded-2xl shadow-2xl"
               />
             </div>
@@ -76,7 +76,7 @@ export default function Page() {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div>
               <ImageWithFallback
-                src="https://images.unsplash.com/photo-1645226880663-81561dcab0ae?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdG9jayUyMG1hcmtldCUyMGNoYXJ0fGVufDF8fHx8MTc2NzQ2NzczN3ww&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                src="/images/about-stock-market.jpg"
                 alt="Market analysis"
                 className="rounded-xl shadow-lg"
               />
@@ -227,7 +227,7 @@ export default function Page() {
             </div>
             <div>
               <ImageWithFallback
-                src="https://images.unsplash.com/photo-1600880292089-90a7e086ee0c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0ZWFtJTIwY29sbGFib3JhdGlvbnxlbnwxfHx8fDE3Njc0OTM1NTR8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+                src="/images/testimonials-team-collaboration.jpg"
                 alt="Team collaboration"
                 className="rounded-xl shadow-lg"
               />
