@@ -1,5 +1,5 @@
 * * *
-# TIG Frontend Web Site Code 
+# TIG Frontend Web Site:  Invest Collective (Version 2 Corp Web Site) 
 * * *
 
 ## Contents
