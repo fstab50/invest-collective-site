@@ -48,16 +48,8 @@ export default function Page() {
               </div>
               <div className="mt-12 flex gap-8">
                 <div>
-                  <div className="text-3xl font-bold text-blue-600">50+</div>
-                  <div className="text-gray-600">Active Members</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-blue-600">200+</div>
-                  <div className="text-gray-600">Weekly Sessions</div>
-                </div>
-                <div>
-                  <div className="text-3xl font-bold text-blue-600">5 yrs</div>
-                  <div className="text-gray-600">Experience</div>
+                  <div className="text-3xl font-bold text-blue-600">Meeting Weekly for over 4 years.</div>
+                  <div className="text-gray-600">Established 2002</div>
                 </div>
               </div>
             </div>
@@ -92,7 +84,7 @@ export default function Page() {
             <div>
               <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Mission</h3>
               <p className="text-gray-600 mb-6">
-                We empower individual investors through education, peer collaboration, and shared market insights. Our weekly meetings provide a structured environment to discuss market trends, analyze opportunities, and learn from each other's experiences.
+                When interpreting financial markets, isolated thoughts are the enemy of clarity We empower individual investors to make better investment decisions via peer collaboration, continuing and shared market insights. Our weekly meetings provide a structured environment to discuss market trends, analyze opportunities, and learn from each other's experiences.
               </p>
               <h3 className="text-2xl font-bold text-gray-900 mb-4">What We Do</h3>
               <ul className="space-y-3 text-gray-600">
