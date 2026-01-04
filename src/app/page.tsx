@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import { ImageWithFallback } from '@/app/components/figma/ImageWithFallback';
 import { TrendingUp, Users, Calendar, ChartLine, Lightbulb, MessageCircle } from 'lucide-react';
 
@@ -39,12 +40,12 @@ export default function Page() {
                 Join our community of passionate investors who meet weekly to share insights, discuss strategies, and navigate the markets together.
               </p>
               <div className="flex gap-4">
-                <button className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+                <Link href="/signup" className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors inline-flex items-center justify-center">
                   Join Our Group
-                </button>
-                <button className="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-lg hover:bg-blue-50 transition-colors">
+                </Link>
+                <a href="#about" className="border-2 border-blue-600 text-blue-600 px-8 py-3 rounded-lg hover:bg-blue-50 transition-colors inline-flex items-center justify-center">
                   Learn More
-                </button>
+                </a>
               </div>
               <div className="mt-12 flex gap-8">
                 <div>
@@ -315,12 +316,12 @@ export default function Page() {
             Take the next step in your investing journey. Connect with experienced traders and grow your wealth through collaborative learning.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <button className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+            <Link href="/signup" className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors inline-flex items-center justify-center">
               Apply for Membership
-            </button>
-            <button className="border-2 border-gray-300 text-gray-700 px-8 py-3 rounded-lg hover:border-gray-400 transition-colors">
+            </Link>
+            <Link href="/signup" className="border-2 border-gray-300 text-gray-700 px-8 py-3 rounded-lg hover:border-gray-400 transition-colors inline-flex items-center justify-center">
               Attend a Free Session
-            </button>
+            </Link>
           </div>
           <p className="text-gray-500 mt-6">
             No credit card required • Cancel anytime • First session is free
