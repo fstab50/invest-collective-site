@@ -46,7 +46,7 @@ export function Navigation() {
             </div>
 
             {/* Divider */}
-            <span className="text-gray-400 text-lg">|</span>
+            <span className="text-gray-400 text-sm">|</span>
 
             {/* Tools */}
             <div className="flex gap-6">
@@ -67,8 +67,7 @@ export function Navigation() {
 
           <Link
             href="/signup"
-            className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors"
-          >
+            className="bg-blue-600 text-white px-3 py-2 text-sm rounded-lg hover:bg-blue-700 transition-colors">
             Join Us
           </Link>
         </div>

@@ -11,7 +11,7 @@ export function Footer() {
           <div>
             <div className="flex items-center gap-2 mb-4">
               <TrendingUp className="w-6 h-6 text-blue-400" />
-              <span className="font-semibold">Invest Collective</span>
+              <span className="font-semibold">The Invest Collective</span>
             </div>
             <p className="text-gray-400 text-sm">
               Building better investors through collaboration and shared knowledge.
