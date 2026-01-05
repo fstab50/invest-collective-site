@@ -10,7 +10,7 @@ export function Navigation() {
         <div className="flex justify-between items-center h-16">
           <Link href="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
             <TrendingUp className="w-8 h-8 text-blue-600" />
-            <span className="font-semibold text-xl">Invest Collective</span>
+            <span className="font-semibold text-xl">The Invest Collective</span>
           </Link>
 
           <div className="hidden md:flex items-center gap-6">

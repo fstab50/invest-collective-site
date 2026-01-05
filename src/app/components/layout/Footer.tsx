@@ -73,7 +73,7 @@ export function Footer() {
           <div>
             <h4 className="font-semibold mb-4">Contact</h4>
             <ul className="space-y-2 text-gray-400 text-sm">
-              <li>info@investcollective.com</li>
+              <li>info@theinvestcollective.com</li>
               <li>(555) 123-4567</li>
               <li>123 Market Street</li>
               <li>New York, NY 10001</li>
@@ -82,7 +82,7 @@ export function Footer() {
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400 text-sm">
-          <p>&copy; 2026 Invest Collective. All rights reserved.</p>
+          <p>&copy; 2026 The Invest Collective. All rights reserved.</p>
         </div>
       </div>
     </footer>
