@@ -16,13 +16,13 @@ export function Navigation() {
           <div className="hidden md:flex items-center gap-6">
             {/* General Links */}
             <div className="flex gap-6">
-              <Link href="/#about" className="text-gray-600 text-sm hover:text-blue-600 transition-colors">
+              <Link href="/#about" className="text-gray-700 font-medium hover:text-blue-600 transition-colors">
                 About
               </Link>
-              <Link href="/#meetings" className="text-gray-600 text-sm hover:text-blue-600 transition-colors">
+              <Link href="/#meetings" className="text-gray-700 font-medium hover:text-blue-600 transition-colors">
                 Meetings
               </Link>
-              <Link href="/#benefits" className="text-gray-600 text-sm hover:text-blue-600 transition-colors">
+              <Link href="/#benefits" className="text-gray-700 font-medium hover:text-blue-600 transition-colors">
                 Benefits
               </Link>
             </div>
@@ -32,16 +32,16 @@ export function Navigation() {
 
             {/* Tools */}
             <div className="flex gap-6">
-              <Link href="/thesis-tracker" className="text-gray-700 font-medium hover:text-blue-600 transition-colors">
+              <Link href="/thesis-tracker" className="text-gray-600 text-sm hover:text-blue-600 transition-colors">
                 Thesis Tracker
               </Link>
-              <Link href="/regime-tracker" className="text-gray-700 font-medium hover:text-blue-600 transition-colors">
+              <Link href="/regime-tracker" className="text-gray-600 text-sm hover:text-blue-600 transition-colors">
                 Regime Tracker
               </Link>
-              <Link href="/cycle-navigator" className="text-gray-700 font-medium hover:text-blue-600 transition-colors">
+              <Link href="/cycle-navigator" className="text-gray-600 text-sm hover:text-blue-600 transition-colors">
                 Cycle Navigator
               </Link>
-              <Link href="/research" className="text-gray-700 font-medium hover:text-blue-600 transition-colors">
+              <Link href="/research" className="text-gray-600 text-sm hover:text-blue-600 transition-colors">
                 Research
               </Link>
             </div>
