@@ -13,28 +13,38 @@ export function Navigation() {
             <span className="font-semibold text-xl">Invest Collective</span>
           </Link>
 
-          <div className="hidden md:flex gap-8">
-            <Link href="/#about" className="text-gray-700 hover:text-blue-600 transition-colors">
-              About
-            </Link>
-            <Link href="/#meetings" className="text-gray-700 hover:text-blue-600 transition-colors">
-              Meetings
-            </Link>
-            <Link href="/#benefits" className="text-gray-700 hover:text-blue-600 transition-colors">
-              Benefits
-            </Link>
-            <Link href="/thesis-tracker" className="text-gray-700 hover:text-blue-600 transition-colors">
-              Thesis Tracker
-            </Link>
-            <Link href="/regime-tracker" className="text-gray-700 hover:text-blue-600 transition-colors">
-              Regime Tracker
-            </Link>
-            <Link href="/cycle-navigator" className="text-gray-700 hover:text-blue-600 transition-colors">
-              Cycle Navigator
-            </Link>
-            <Link href="/research" className="text-gray-700 hover:text-blue-600 transition-colors">
-              Research
-            </Link>
+          <div className="hidden md:flex items-center gap-6">
+            {/* General Links */}
+            <div className="flex gap-6">
+              <Link href="/#about" className="text-gray-700 hover:text-blue-600 transition-colors">
+                About
+              </Link>
+              <Link href="/#meetings" className="text-gray-700 hover:text-blue-600 transition-colors">
+                Meetings
+              </Link>
+              <Link href="/#benefits" className="text-gray-700 hover:text-blue-600 transition-colors">
+                Benefits
+              </Link>
+            </div>
+
+            {/* Divider */}
+            <div className="h-6 w-px bg-gray-300" />
+
+            {/* Tools */}
+            <div className="flex gap-6">
+              <Link href="/thesis-tracker" className="text-gray-700 hover:text-blue-600 transition-colors">
+                Thesis Tracker
+              </Link>
+              <Link href="/regime-tracker" className="text-gray-700 hover:text-blue-600 transition-colors">
+                Regime Tracker
+              </Link>
+              <Link href="/cycle-navigator" className="text-gray-700 hover:text-blue-600 transition-colors">
+                Cycle Navigator
+              </Link>
+              <Link href="/research" className="text-gray-700 hover:text-blue-600 transition-colors">
+                Research
+              </Link>
+            </div>
           </div>
 
           <Link
