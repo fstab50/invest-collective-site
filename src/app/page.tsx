@@ -6,28 +6,7 @@ import { TrendingUp, Users, Calendar, ChartLine, Lightbulb, MessageCircle } from
 
 export default function Page() {
   return (
-    <div className="size-full overflow-y-auto bg-white">
-      {/* Navigation */}
-      <nav className="border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center gap-2">
-              <TrendingUp className="w-8 h-8 text-blue-600" />
-              <span className="font-semibold text-xl">Invest Collective</span>
-            </div>
-            <div className="hidden md:flex gap-8">
-              <a href="#about" className="text-gray-700 hover:text-blue-600 transition-colors">About</a>
-              <a href="#meetings" className="text-gray-700 hover:text-blue-600 transition-colors">Meetings</a>
-              <a href="#benefits" className="text-gray-700 hover:text-blue-600 transition-colors">Benefits</a>
-              <a href="#join" className="text-gray-700 hover:text-blue-600 transition-colors">Join Us</a>
-            </div>
-            <button className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
-              Contact
-            </button>
-          </div>
-        </div>
-      </nav>
-
+    <div className="bg-white">
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-blue-50 to-indigo-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">
@@ -328,53 +307,6 @@ export default function Page() {
           </p>
         </div>
       </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <div className="flex items-center gap-2 mb-4">
-                <TrendingUp className="w-6 h-6 text-blue-400" />
-                <span className="font-semibold">Invest Collective</span>
-              </div>
-              <p className="text-gray-400 text-sm">
-                Building better investors through collaboration and shared knowledge.
-              </p>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Quick Links</h4>
-              <ul className="space-y-2 text-gray-400 text-sm">
-                <li><a href="#about" className="hover:text-white transition-colors">About Us</a></li>
-                <li><a href="#meetings" className="hover:text-white transition-colors">Meetings</a></li>
-                <li><a href="#benefits" className="hover:text-white transition-colors">Benefits</a></li>
-                <li><a href="#join" className="hover:text-white transition-colors">Join Us</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Resources</h4>
-              <ul className="space-y-2 text-gray-400 text-sm">
-                <li><a href="#" className="hover:text-white transition-colors">Blog</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Newsletter</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">Events</a></li>
-                <li><a href="#" className="hover:text-white transition-colors">FAQ</a></li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Contact</h4>
-              <ul className="space-y-2 text-gray-400 text-sm">
-                <li>info@investcollective.com</li>
-                <li>(555) 123-4567</li>
-                <li>123 Market Street</li>
-                <li>New York, NY 10001</li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400 text-sm">
-            <p>&copy; 2026 Invest Collective. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }

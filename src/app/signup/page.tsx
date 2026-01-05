@@ -74,19 +74,15 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white border-b border-gray-200">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+    <div className="min-h-screen bg-gray-50 py-12">
+      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Back Button */}
+        <div className="mb-6">
           <Link href="/" className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors">
             <ChevronLeft className="w-5 h-5" />
             <span>Back to Home</span>
           </Link>
         </div>
-      </header>
-
-      {/* Main Content */}
-      <main className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 md:p-12">
           {/* Header */}
           <div className="text-center mb-10">
@@ -371,7 +367,7 @@ export default function SignupPage() {
             {' '}or contact us directly.
           </p>
         </div>
-      </main>
+      </div>
     </div>
   );
 }
