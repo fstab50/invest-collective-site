@@ -23,6 +23,7 @@
 # Wrangler (Cloudflare)
 .wrangler/
 .dev.vars
+wrangler.jsonc
 
 # production
 /build
