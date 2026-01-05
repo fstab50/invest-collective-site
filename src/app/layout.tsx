@@ -4,8 +4,15 @@ import { Navigation } from './components/layout/Navigation';
 import { Footer } from './components/layout/Footer';
 
 export const metadata: Metadata = {
-  title: 'Invest Collective - Trading Group',
+  title: 'The Invest Collective',
   description: 'Join our community of passionate investors who meet weekly to share insights and grow together.',
+  icons: {
+    icon: [
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico', sizes: '32x32' },
+    ],
+    apple: '/apple-touch-icon.png',
+  },
 };
 
 export default function RootLayout({
