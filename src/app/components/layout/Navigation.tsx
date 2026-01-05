@@ -14,6 +14,15 @@ export function Navigation() {
           </Link>
 
           <div className="hidden md:flex gap-8">
+            <Link href="/#about" className="text-gray-700 hover:text-blue-600 transition-colors">
+              About
+            </Link>
+            <Link href="/#meetings" className="text-gray-700 hover:text-blue-600 transition-colors">
+              Meetings
+            </Link>
+            <Link href="/#benefits" className="text-gray-700 hover:text-blue-600 transition-colors">
+              Benefits
+            </Link>
             <Link href="/thesis-tracker" className="text-gray-700 hover:text-blue-600 transition-colors">
               Thesis Tracker
             </Link>
