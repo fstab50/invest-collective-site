@@ -1,11 +1,12 @@
 'use client';
 
 import Link from 'next/link';
-import { TrendingUp } from 'lucide-react';
+import { TrendingUp, Menu, X } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,6 +16,15 @@ export function Navigation() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    // Prevent body scroll when mobile menu is open
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+  }, [isMobileMenuOpen]);
 
   return (
     <nav
@@ -65,12 +75,97 @@ export function Navigation() {
             </div>
           </div>
 
+          {/* Mobile menu button */}
+          <div className="flex items-center gap-4 md:hidden">
+            <Link
+              href="/signup"
+              className="bg-blue-600 text-white px-3 py-2 text-sm rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              Join Us
+            </Link>
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="text-gray-700 hover:text-blue-600 transition-colors"
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+
+          {/* Desktop Join Us button */}
           <Link
             href="/signup"
-            className="bg-blue-600 text-white px-3 py-2 text-sm rounded-lg hover:bg-blue-700 transition-colors">
+            className="hidden md:block bg-blue-600 text-white px-3 py-2 text-sm rounded-lg hover:bg-blue-700 transition-colors"
+          >
             Join Us
           </Link>
         </div>
+
+        {/* Mobile menu */}
+        {isMobileMenuOpen && (
+          <div className="md:hidden absolute top-16 left-0 right-0 bg-white border-b border-gray-200 shadow-lg">
+            <div className="px-4 py-6 space-y-4">
+              {/* General Links */}
+              <div className="space-y-3">
+                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Menu</p>
+                <Link
+                  href="/#about"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block text-gray-700 font-medium hover:text-blue-600 transition-colors py-2"
+                >
+                  About
+                </Link>
+                <Link
+                  href="/#meetings"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block text-gray-700 font-medium hover:text-blue-600 transition-colors py-2"
+                >
+                  Meetings
+                </Link>
+                <Link
+                  href="/#benefits"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block text-gray-700 font-medium hover:text-blue-600 transition-colors py-2"
+                >
+                  Benefits
+                </Link>
+              </div>
+
+              {/* Tools */}
+              <div className="space-y-3 pt-4 border-t border-gray-200">
+                <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">Tools</p>
+                <Link
+                  href="/thesis-tracker"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block text-gray-600 hover:text-blue-600 transition-colors py-2"
+                >
+                  Thesis Tracker
+                </Link>
+                <Link
+                  href="/regime-tracker"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block text-gray-600 hover:text-blue-600 transition-colors py-2"
+                >
+                  Regime Tracker
+                </Link>
+                <Link
+                  href="/cycle-navigator"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block text-gray-600 hover:text-blue-600 transition-colors py-2"
+                >
+                  Cycle Navigator
+                </Link>
+                <Link
+                  href="/research"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block text-gray-600 hover:text-blue-600 transition-colors py-2"
+                >
+                  Research
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </nav>
   );
