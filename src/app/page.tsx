@@ -182,7 +182,8 @@ export default function Page() {
                   </div>
                   <div>
                     <h3 className="font-bold text-gray-900 mb-1">When We Meet</h3>
-                    <p className="text-gray-600">Every Thursday at 7:00 PM EST</p>
+                    <p className="text-gray-600">Main Group - Every Friday at 10:30 AM Central</p>
+                    <p className="text-gray-600">Leadership/Prep Sub-Group - Every Wednesday at 1:30 PM Central</p>
                   </div>
                 </div>
                 <div className="flex gap-4">
@@ -191,7 +192,7 @@ export default function Page() {
                   </div>
                   <div>
                     <h3 className="font-bold text-gray-900 mb-1">Format</h3>
-                    <p className="text-gray-600">Hybrid: In-person and virtual attendance options</p>
+                    <p className="text-gray-600">Virtual Meetings via Google Meet</p>
                   </div>
                 </div>
                 <div className="flex gap-4">
@@ -215,8 +216,7 @@ export default function Page() {
                 <h4 className="font-bold text-gray-900 mb-2">Typical Meeting Agenda</h4>
                 <ul className="space-y-2 text-gray-600">
                   <li>• Market recap and key news (15 min)</li>
-                  <li>• Member stock pitches (20 min)</li>
-                  <li>• Strategy discussion (20 min)</li>
+                  <li>• Member presentation (30 min)</li>
                   <li>• Q&A and networking (15 min)</li>
                 </ul>
               </div>
@@ -297,9 +297,6 @@ export default function Page() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/signup" className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition-colors inline-flex items-center justify-center">
               Apply for Membership
-            </Link>
-            <Link href="/signup" className="border-2 border-gray-300 text-gray-700 px-8 py-3 rounded-lg hover:border-gray-400 transition-colors inline-flex items-center justify-center">
-              Attend a Free Session
             </Link>
           </div>
           <p className="text-gray-500 mt-6">
