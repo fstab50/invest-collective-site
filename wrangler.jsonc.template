@@ -7,5 +7,21 @@
   "assets": {
     "directory": ".open-next/assets",
     "binding": "ASSETS"
+  },
+  "r2_buckets": [
+    {
+      "binding": "RESEARCH_PDFS",
+      "bucket_name": "invest-collective-research"
+    }
+  ],
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "invest-collective-db",
+      "database_id": "c5fff613-319c-4f52-a17e-0a9bccd6afbd"
+    }
+  ],
+  "ai": {
+    "binding": "AI"
   }
 }
