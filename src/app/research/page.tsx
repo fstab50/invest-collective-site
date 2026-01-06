@@ -1,4 +1,4 @@
-import { getRequestContext } from '@cloudflare/next-on-pages';
+import { getCloudflareContext } from '@opennextjs/cloudflare';
 import Link from 'next/link';
 import { FileText, Calendar, Tag, Download } from 'lucide-react';
 
@@ -16,8 +16,8 @@ interface Article {
 
 async function getArticles(): Promise<Article[]> {
   try {
-    const ctx = getRequestContext();
-    const { DB } = ctx.env;
+    const { env } = getCloudflareContext();
+    const { DB } = env;
 
     const { results } = await DB.prepare(
       'SELECT id, slug, title, date, topics, summary, pdf_url FROM articles ORDER BY date DESC',

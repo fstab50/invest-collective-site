@@ -1,4 +1,4 @@
-import { getRequestContext } from '@cloudflare/next-on-pages';
+import { getCloudflareContext } from '@opennextjs/cloudflare';
 import { NextRequest, NextResponse } from 'next/server';
 
 export const runtime = 'edge';
@@ -8,8 +8,8 @@ export async function GET(
   { params }: { params: { filename: string } },
 ) {
   try {
-    const ctx = getRequestContext();
-    const { RESEARCH_PDFS } = ctx.env;
+    const { env } = getCloudflareContext();
+    const { RESEARCH_PDFS } = env;
 
     const { filename } = params;
 

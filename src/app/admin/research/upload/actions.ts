@@ -1,6 +1,6 @@
 'use server';
 
-import { getRequestContext } from '@cloudflare/next-on-pages';
+import { getCloudflareContext } from '@opennextjs/cloudflare';
 
 function generateSlug(title: string): string {
   return title
@@ -11,8 +11,8 @@ function generateSlug(title: string): string {
 
 export async function uploadResearchArticle(formData: FormData) {
   try {
-    const ctx = getRequestContext();
-    const { RESEARCH_PDFS, DB, AI } = ctx.env;
+    const { env } = getCloudflareContext();
+    const { RESEARCH_PDFS, DB, AI } = env;
 
     // Extract form data
     const pdfFile = formData.get('pdf') as File;
