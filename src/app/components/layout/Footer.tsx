@@ -73,7 +73,16 @@ export function Footer() {
           <div>
             <h4 className="font-semibold mb-4">Contact</h4>
             <ul className="space-y-2 text-gray-400 text-sm">
-              <li>info@theinvestcollective.com</li>
+              <li>
+                <Link href="/contact" className="hover:text-white transition-colors">
+                  Contact Us
+                </Link>
+              </li>
+              <li>
+                <a href="mailto:info@theinvestcollective.com" className="hover:text-white transition-colors">
+                  info@theinvestcollective.com
+                </a>
+              </li>
               <li>(555) 123-4567</li>
               <li>123 Market Street</li>
               <li>New York, NY 10001</li>
