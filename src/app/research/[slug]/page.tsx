@@ -3,7 +3,8 @@ import Link from 'next/link';
 import { ChevronLeft, Calendar, Tag, Download, FileText } from 'lucide-react';
 import { notFound } from 'next/navigation';
 
-export const runtime = 'edge';
+// Note: Do not use 'edge' runtime with OpenNext Cloudflare
+// The worker runtime is automatically used for all routes
 
 interface Article {
   id: number;

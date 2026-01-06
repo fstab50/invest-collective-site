@@ -2,7 +2,8 @@ import { getCloudflareContext } from '@opennextjs/cloudflare';
 import Link from 'next/link';
 import { FileText, Calendar, Tag, Download } from 'lucide-react';
 
-export const runtime = 'edge';
+// Note: Do not use 'edge' runtime with OpenNext Cloudflare
+// The worker runtime is automatically used for all routes
 
 interface Article {
   id: number;
