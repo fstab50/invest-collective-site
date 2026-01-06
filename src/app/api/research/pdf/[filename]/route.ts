@@ -1,7 +1,8 @@
 import { getCloudflareContext } from '@opennextjs/cloudflare';
 import { NextRequest, NextResponse } from 'next/server';
 
-export const runtime = 'edge';
+// Note: Do not use 'edge' runtime in API routes with OpenNext Cloudflare
+// The worker runtime is automatically used
 
 export async function GET(
   request: NextRequest,
