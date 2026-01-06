@@ -23,7 +23,9 @@ async function getArticle(slug: string): Promise<Article | null> {
     const { DB } = env;
 
     const { results } = await DB.prepare(
-      'SELECT id, slug, title, date, topics, summary, html_content, pdf_url FROM articles WHERE slug = ?',
+      `SELECT id, slug, title, date, topics, summary, html_content, pdf_url
+       FROM articles
+       WHERE slug = ? AND status = 'published'`,
     )
       .bind(slug)
       .all<Article>();

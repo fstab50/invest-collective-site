@@ -83,10 +83,10 @@ Return ONLY the HTML content (no <html>, <head>, or <body> tags - just the artic
         <p>This research provides valuable insights into ${topicsArray.join(', ')}. Access the full presentation for comprehensive details.</p>
       </article>`;
 
-    // Store article in D1
+    // Store article in D1 as draft
     await DB.prepare(
-      `INSERT INTO articles (slug, title, date, topics, summary, html_content, pdf_url, pdf_filename)
-       VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+      `INSERT INTO articles (slug, title, date, topics, summary, html_content, pdf_url, pdf_filename, status)
+       VALUES (?, ?, ?, ?, ?, ?, ?, ?, 'draft')`,
     )
       .bind(
         slug,
@@ -103,6 +103,7 @@ Return ONLY the HTML content (no <html>, <head>, or <body> tags - just the artic
     return {
       success: true,
       slug,
+      message: 'Article saved as draft. Review and publish when ready.',
     };
   } catch (error) {
     console.error('Upload error:', error);

@@ -21,7 +21,10 @@ async function getArticles(): Promise<Article[]> {
     const { DB } = env;
 
     const { results } = await DB.prepare(
-      'SELECT id, slug, title, date, topics, summary, pdf_url FROM articles ORDER BY date DESC',
+      `SELECT id, slug, title, date, topics, summary, pdf_url
+       FROM articles
+       WHERE status = 'published'
+       ORDER BY date DESC`,
     ).all<Article>();
 
     return results || [];

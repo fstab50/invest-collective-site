@@ -1,11 +1,13 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { ChevronLeft, Upload, FileText, Loader2 } from 'lucide-react';
 import { uploadResearchArticle } from './actions';
 
 export default function AdminUploadPage() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     title: '',
     date: new Date().toISOString().split('T')[0],
@@ -17,6 +19,7 @@ export default function AdminUploadPage() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [errorMessage, setErrorMessage] = useState('');
+  const [successSlug, setSuccessSlug] = useState<string | null>(null);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({
@@ -56,15 +59,13 @@ export default function AdminUploadPage() {
 
       const result = await uploadResearchArticle(formDataToSubmit);
 
-      if (result.success) {
+      if (result.success && result.slug) {
         setSubmitStatus('success');
-        setFormData({
-          title: '',
-          date: new Date().toISOString().split('T')[0],
-          topics: '',
-          summary: '',
-        });
-        setPdfFile(null);
+        setSuccessSlug(result.slug);
+        // Redirect to edit page after 2 seconds
+        setTimeout(() => {
+          router.push(`/admin/research/edit/${result.slug}`);
+        }, 2000);
       } else {
         setSubmitStatus('error');
         setErrorMessage(result.error || 'Failed to upload article');
@@ -83,15 +84,15 @@ export default function AdminUploadPage() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Back Button */}
         <div className="mb-6 flex items-center justify-between">
-          <Link href="/" className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors">
+          <Link href="/admin" className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors">
             <ChevronLeft className="w-5 h-5" />
-            <span>Back to Home</span>
+            <span>Back to Admin Dashboard</span>
           </Link>
           <Link
-            href="/research"
+            href="/admin/research/manage"
             className="text-sm text-gray-600 hover:text-blue-600 transition-colors"
           >
-            View Published Articles →
+            Manage Articles →
           </Link>
         </div>
 
@@ -113,7 +114,7 @@ export default function AdminUploadPage() {
           {submitStatus === 'success' && (
             <div className="mb-8 p-4 bg-green-50 border border-green-200 rounded-lg">
               <p className="text-green-800 font-medium">
-                Article uploaded successfully! The AI is processing the PDF content. It will appear on the research page shortly.
+                Article saved as draft! Redirecting to edit page where you can preview and publish...
               </p>
             </div>
           )}

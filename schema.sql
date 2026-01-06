@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS articles (
   html_content TEXT NOT NULL,
   pdf_url TEXT NOT NULL,
   pdf_filename TEXT NOT NULL,
+  status TEXT NOT NULL DEFAULT 'draft', -- 'draft' or 'published'
   created_at TEXT NOT NULL DEFAULT (datetime('now')),
   updated_at TEXT NOT NULL DEFAULT (datetime('now'))
 );
@@ -21,3 +22,6 @@ CREATE INDEX IF NOT EXISTS idx_articles_date ON articles(date DESC);
 
 -- Index for searching by topics (will need to use LIKE for JSON search)
 CREATE INDEX IF NOT EXISTS idx_articles_topics ON articles(topics);
+
+-- Index for filtering by status
+CREATE INDEX IF NOT EXISTS idx_articles_status ON articles(status);
