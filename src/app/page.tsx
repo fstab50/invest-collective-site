@@ -3,12 +3,10 @@
 import Link from 'next/link';
 import { ImageWithFallback } from '@/app/components/figma/ImageWithFallback';
 import { TrendingUp, Users, Calendar, ChartLine, Lightbulb, MessageCircle } from 'lucide-react';
-import { AnalyticsTracker } from '@/components/AnalyticsTracker';
 
 export default function Page() {
   return (
     <div className="bg-white">
-      <AnalyticsTracker event_type="page_view" page_path="/" />
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-blue-50 to-indigo-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24">

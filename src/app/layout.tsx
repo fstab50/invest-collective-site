@@ -3,6 +3,7 @@ import Script from 'next/script';
 import './globals.css';
 import { Navigation } from './components/layout/Navigation';
 import { Footer } from './components/layout/Footer';
+import { PageViewTracker } from '@/components/PageViewTracker';
 
 export const metadata: Metadata = {
   title: 'The Invest Collective',
@@ -26,6 +27,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className="antialiased flex flex-col min-h-screen">
+        <PageViewTracker />
         <Navigation />
         <main className="flex-1">{children}</main>
         <Footer />

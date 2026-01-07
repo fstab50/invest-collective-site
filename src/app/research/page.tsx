@@ -2,7 +2,6 @@ import { getCloudflareContext } from '@opennextjs/cloudflare';
 import Link from 'next/link';
 import { FileText, Calendar, Tag, Download } from 'lucide-react';
 import { TopicFilter } from './components/TopicFilter';
-import { AnalyticsTracker } from '@/components/AnalyticsTracker';
 
 // Note: Do not use 'edge' runtime with OpenNext Cloudflare
 // The worker runtime is automatically used for all routes
@@ -68,8 +67,6 @@ export default async function ResearchPage({
 
   return (
     <div className="min-h-screen bg-gray-50 py-24">
-      <AnalyticsTracker event_type="page_view" page_path="/research" />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
