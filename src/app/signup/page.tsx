@@ -88,7 +88,7 @@ export default function SignupPage() {
           <div className="text-center mb-10">
             <h1 className="text-4xl font-bold text-gray-900 mb-4">Apply to Join</h1>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              We're looking for passionate investors who want to collaborate, share insights, and grow together.
+              We&apos;re looking for passionate investors who want to collaborate, share insights, and grow together.
               Tell us about your investment journey and what you hope to contribute to our community.
             </p>
           </div>
@@ -97,7 +97,7 @@ export default function SignupPage() {
           {submitStatus === 'success' && (
             <div className="mb-8 p-4 bg-green-50 border border-green-200 rounded-lg">
               <p className="text-green-800 font-medium">
-                Thank you for your application! We'll review it and get back to you within 2-3 business days.
+                Thank you for your application! We&aposll review it and get back to you within 2-3 business days.
               </p>
             </div>
           )}

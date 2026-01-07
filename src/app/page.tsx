@@ -50,7 +50,7 @@ export default function Page() {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-gray-900 mb-4">About Our Group</h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              We're a dedicated community of traders and investors who believe that collaboration and shared knowledge lead to better investment decisions.
+              We&apos;re a dedicated community of traders and investors who believe that collaboration and shared knowledge lead to better investment decisions.
             </p>
           </div>
           <div className="grid md:grid-cols-2 gap-12 items-center">
@@ -64,7 +64,7 @@ export default function Page() {
             <div>
               <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Mission</h3>
               <p className="text-gray-600 mb-6">
-                When interpreting financial markets, isolated thoughts are the enemy of clarity We empower individual investors to make better investment decisions via peer collaboration, continuing and shared market insights. Our weekly meetings provide a structured environment to discuss market trends, analyze opportunities, and learn from each other's experiences.
+                When interpreting financial markets, isolated thoughts are the enemy of clarity We empower individual investors to make better investment decisions via peer collaboration, continuing and shared market insights. Our weekly meetings provide a structured environment to discuss market trends, analyze opportunities, and learn from each other&apos;s experiences.
               </p>
               <h3 className="text-2xl font-bold text-gray-900 mb-4">What We Do</h3>
               <ul className="space-y-3 text-gray-600">
@@ -231,7 +231,7 @@ export default function Page() {
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-white mb-4">What Our Members Say</h2>
             <p className="text-xl text-blue-100">
-              Hear from investors who've grown their skills with us
+              Hear from investors who&apos;ve grown their skills with us
             </p>
           </div>
           <div className="grid md:grid-cols-3 gap-8">
@@ -244,7 +244,7 @@ export default function Page() {
                 ))}
               </div>
               <p className="text-gray-600 mb-4">
-                "This group has transformed my approach to investing. The weekly discussions keep me informed and accountable. Best investment I've made!"
+                This group has transformed my approach to investing. The weekly discussions keep me informed and accountable. Best investment I&apos;ve made!
               </p>
               <div>
                 <div className="font-bold text-gray-900">Sarah Chen</div>
@@ -260,7 +260,7 @@ export default function Page() {
                 ))}
               </div>
               <p className="text-gray-600 mb-4">
-                "The diversity of perspectives here is incredible. I've learned strategies I never would have discovered on my own. Highly recommend!"
+                The diversity of perspectives here is incredible. I&apos;ve learned strategies I never would have discovered on my own. Highly recommend!
               </p>
               <div>
                 <div className="font-bold text-gray-900">Michael Rodriguez</div>
@@ -276,7 +276,7 @@ export default function Page() {
                 ))}
               </div>
               <p className="text-gray-600 mb-4">
-                "As a beginner, I was nervous to join, but everyone was so welcoming. I've grown my portfolio and my confidence significantly."
+                As a beginner, I was nervous to join, but everyone was so welcoming. I&apos;ve grown my portfolio and my confidence significantly.
               </p>
               <div>
                 <div className="font-bold text-gray-900">Emily Thompson</div>
