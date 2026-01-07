@@ -65,8 +65,8 @@ export default function AdminDashboard() {
             className="group bg-white rounded-xl shadow-sm border border-gray-200 p-8 opacity-60 hover:opacity-100 hover:shadow-md hover:border-blue-300 transition-all"
           >
             <div className="flex items-center gap-4 mb-4">
-              <div className="bg-gray-100 p-4 rounded-full group-hover:bg-blue-100 transition-colors">
-                <Target className="w-8 h-8 text-gray-400 group-hover:text-blue-600 transition-colors" />
+              <div className="bg-blue-100 p-4 rounded-full group-hover:bg-blue-200 transition-colors">
+                <Target className="w-8 h-8 text-gray-900 group-hover:text-blue-600 transition-colors" />
               </div>
               <h2 className="text-2xl font-bold text-gray-900">Thesis</h2>
             </div>
@@ -85,8 +85,8 @@ export default function AdminDashboard() {
             className="group bg-white rounded-xl shadow-sm border border-gray-200 p-8 opacity-60 hover:opacity-100 hover:shadow-md hover:border-purple-300 transition-all"
           >
             <div className="flex items-center gap-4 mb-4">
-              <div className="bg-gray-100 p-4 rounded-full group-hover:bg-purple-100 transition-colors">
-                <TrendingUp className="w-8 h-8 text-gray-400 group-hover:text-purple-600 transition-colors" />
+              <div className="bg-purple-100 p-4 rounded-full group-hover:bg-purple-200 transition-colors">
+                <TrendingUp className="w-8 h-8 text-gray-900 group-hover:text-purple-600 transition-colors" />
               </div>
               <h2 className="text-2xl font-bold text-gray-900">Regime</h2>
             </div>
@@ -105,8 +105,8 @@ export default function AdminDashboard() {
             className="group bg-white rounded-xl shadow-sm border border-gray-200 p-8 opacity-60 hover:opacity-100 hover:shadow-md hover:border-green-300 transition-all"
           >
             <div className="flex items-center gap-4 mb-4">
-              <div className="bg-gray-100 p-4 rounded-full group-hover:bg-green-100 transition-colors">
-                <Activity className="w-8 h-8 text-gray-400 group-hover:text-green-600 transition-colors" />
+              <div className="bg-green-100 p-4 rounded-full group-hover:bg-green-200 transition-colors">
+                <Activity className="w-8 h-8 text-gray-900 group-hover:text-green-600 transition-colors" />
               </div>
               <h2 className="text-2xl font-bold text-gray-900">Cycle</h2>
             </div>
