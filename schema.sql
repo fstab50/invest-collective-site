@@ -29,7 +29,8 @@ CREATE INDEX IF NOT EXISTS idx_articles_status ON articles(status);
 -- Analytics events table for tracking article views and PDF downloads
 CREATE TABLE IF NOT EXISTS analytics_events (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  event_type TEXT NOT NULL, -- 'article_view', 'pdf_download', 'topic_filter'
+  event_type TEXT NOT NULL, -- 'page_view', 'article_view', 'pdf_download', 'topic_filter'
+  page_path TEXT,
   article_slug TEXT,
   topic TEXT,
   user_agent TEXT,
@@ -43,6 +44,9 @@ CREATE INDEX IF NOT EXISTS idx_analytics_event_type ON analytics_events(event_ty
 
 -- Index for faster queries by article slug
 CREATE INDEX IF NOT EXISTS idx_analytics_article_slug ON analytics_events(article_slug);
+
+-- Index for faster queries by page path
+CREATE INDEX IF NOT EXISTS idx_analytics_page_path ON analytics_events(page_path);
 
 -- Index for faster queries by timestamp
 CREATE INDEX IF NOT EXISTS idx_analytics_timestamp ON analytics_events(timestamp DESC);

@@ -39,7 +39,7 @@ export default async function AnalyticsPage() {
   const articleSlugs = analytics.topArticles.map((a) => a.article_slug);
   const articleTitles = await getArticleTitles(articleSlugs);
 
-  const { summary, topArticles, topTopics, eventsByDay } = analytics;
+  const { summary, topPages, topArticles, topTopics, eventsByDay } = analytics;
 
   return (
     <div className="min-h-screen bg-gray-50 py-24">
@@ -64,11 +64,20 @@ export default async function AnalyticsPage() {
         </div>
 
         {/* Summary Cards */}
-        <div className="grid gap-6 md:grid-cols-3 mb-8">
+        <div className="grid gap-6 md:grid-cols-4 mb-8">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+            <div className="flex items-center justify-between mb-2">
+              <h3 className="text-sm font-medium text-gray-600">Page Views</h3>
+              <Eye className="w-5 h-5 text-blue-600" />
+            </div>
+            <p className="text-3xl font-bold text-gray-900">{summary.pageViews.toLocaleString()}</p>
+            <p className="text-xs text-gray-500 mt-1">Last 30 days</p>
+          </div>
+
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center justify-between mb-2">
               <h3 className="text-sm font-medium text-gray-600">Article Views</h3>
-              <Eye className="w-5 h-5 text-blue-600" />
+              <FileText className="w-5 h-5 text-green-600" />
             </div>
             <p className="text-3xl font-bold text-gray-900">{summary.articleViews.toLocaleString()}</p>
             <p className="text-xs text-gray-500 mt-1">Last 30 days</p>
@@ -77,7 +86,7 @@ export default async function AnalyticsPage() {
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
             <div className="flex items-center justify-between mb-2">
               <h3 className="text-sm font-medium text-gray-600">PDF Downloads</h3>
-              <Download className="w-5 h-5 text-green-600" />
+              <Download className="w-5 h-5 text-orange-600" />
             </div>
             <p className="text-3xl font-bold text-gray-900">{summary.pdfDownloads.toLocaleString()}</p>
             <p className="text-xs text-gray-500 mt-1">Last 30 days</p>
@@ -91,6 +100,37 @@ export default async function AnalyticsPage() {
             <p className="text-3xl font-bold text-gray-900">{summary.totalEvents.toLocaleString()}</p>
             <p className="text-xs text-gray-500 mt-1">All interactions</p>
           </div>
+        </div>
+
+        {/* Top Pages */}
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-8">
+          <div className="flex items-center gap-2 mb-6">
+            <Eye className="w-5 h-5 text-blue-600" />
+            <h2 className="text-xl font-bold text-gray-900">Most Viewed Pages</h2>
+          </div>
+
+          {topPages.length === 0 ? (
+            <p className="text-gray-500 text-center py-8">No page views yet</p>
+          ) : (
+            <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
+              {topPages.map((page, index) => (
+                <div key={page.page_path} className="flex items-start gap-3 p-4 rounded-lg bg-gray-50">
+                  <div className="flex items-center justify-center w-8 h-8 rounded-full bg-blue-100 text-blue-600 font-bold text-sm shrink-0">
+                    {index + 1}
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <Link
+                      href={page.page_path}
+                      className="font-medium text-gray-900 hover:text-blue-600 transition-colors block truncate"
+                    >
+                      {page.page_path === '/' ? 'Home' : page.page_path}
+                    </Link>
+                    <p className="text-sm text-gray-500">{page.views.toLocaleString()} views</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="grid gap-6 lg:grid-cols-2 mb-8">
