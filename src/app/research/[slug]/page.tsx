@@ -2,6 +2,7 @@ import { getCloudflareContext } from '@opennextjs/cloudflare';
 import Link from 'next/link';
 import { ChevronLeft, Calendar, Tag, Download, FileText } from 'lucide-react';
 import { notFound } from 'next/navigation';
+import { AnalyticsTracker } from '@/components/AnalyticsTracker';
 
 // Note: Do not use 'edge' runtime with OpenNext Cloudflare
 // The worker runtime is automatically used for all routes
@@ -48,6 +49,9 @@ export default async function ArticlePage({ params }: { params: { slug: string }
 
   return (
     <div className="min-h-screen bg-gray-50 py-24">
+      {/* Track article view */}
+      <AnalyticsTracker event_type="article_view" article_slug={article.slug} />
+
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Back Button */}
         <div className="mb-6">

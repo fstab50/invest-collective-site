@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import Script from 'next/script';
 import './globals.css';
 import { Navigation } from './components/layout/Navigation';
 import { Footer } from './components/layout/Footer';
@@ -20,12 +21,24 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const cfWebAnalyticsToken = process.env.NEXT_PUBLIC_CLOUDFLARE_WEB_ANALYTICS_TOKEN;
+
   return (
     <html lang="en">
       <body className="antialiased flex flex-col min-h-screen">
         <Navigation />
         <main className="flex-1">{children}</main>
         <Footer />
+
+        {/* Cloudflare Web Analytics */}
+        {cfWebAnalyticsToken && (
+          <Script
+            defer
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon={`{"token": "${cfWebAnalyticsToken}"}`}
+            strategy="afterInteractive"
+          />
+        )}
       </body>
     </html>
   );

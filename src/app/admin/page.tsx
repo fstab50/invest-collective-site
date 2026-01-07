@@ -59,21 +59,27 @@ export default function AdminDashboard() {
             </div>
           </Link>
 
-          {/* Analytics (Coming Soon) */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 opacity-60">
+          {/* Analytics */}
+          <Link
+            href="/admin/analytics"
+            className="group bg-white rounded-xl shadow-sm border border-gray-200 p-8 hover:shadow-md hover:border-purple-300 transition-all"
+          >
             <div className="flex items-center gap-4 mb-4">
-              <div className="bg-gray-100 p-4 rounded-full">
-                <BarChart3 className="w-8 h-8 text-gray-400" />
+              <div className="bg-purple-100 p-4 rounded-full group-hover:bg-purple-200 transition-colors">
+                <BarChart3 className="w-8 h-8 text-purple-600" />
               </div>
-              <h2 className="text-2xl font-bold text-gray-900">Analytics</h2>
+              <h2 className="text-2xl font-bold text-gray-900 group-hover:text-purple-600 transition-colors">
+                Analytics
+              </h2>
             </div>
             <p className="text-gray-600 mb-4">
-              View website traffic, popular articles, and engagement metrics.
+              View article performance, popular topics, and engagement metrics.
             </p>
-            <div className="flex items-center gap-4 text-sm text-gray-400">
-              <span>Coming soon</span>
+            <div className="flex items-center gap-4 text-sm text-gray-500">
+              <span>View analytics</span>
+              <span>→</span>
             </div>
-          </div>
+          </Link>
 
           {/* Members (Coming Soon) */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 opacity-60">
@@ -111,7 +117,7 @@ export default function AdminDashboard() {
         {/* Quick Stats */}
         <div className="mt-12 bg-white rounded-xl shadow-sm border border-gray-200 p-8">
           <h3 className="text-xl font-bold text-gray-900 mb-6">Quick Access</h3>
-          <div className="grid gap-4 md:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-4">
             <Link
               href="/admin/research/upload"
               className="flex items-center gap-3 p-4 rounded-lg hover:bg-gray-50 transition-colors border border-gray-200"
@@ -125,6 +131,13 @@ export default function AdminDashboard() {
             >
               <FileText className="w-5 h-5 text-blue-600" />
               <span className="font-medium text-gray-900">Manage Articles</span>
+            </Link>
+            <Link
+              href="/admin/analytics"
+              className="flex items-center gap-3 p-4 rounded-lg hover:bg-gray-50 transition-colors border border-gray-200"
+            >
+              <BarChart3 className="w-5 h-5 text-purple-600" />
+              <span className="font-medium text-gray-900">View Analytics</span>
             </Link>
             <Link
               href="/research"

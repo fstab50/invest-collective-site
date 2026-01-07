@@ -17,6 +17,15 @@ export function TopicFilter({ allTopics }: TopicFilterProps) {
       // If clicking the same topic, clear the filter
       router.push('/research');
     } else {
+      // Track topic filter usage
+      fetch('/api/analytics/track', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ event_type: 'topic_filter', topic }),
+      }).catch(() => {
+        // Silently fail
+      });
+
       // Set the new topic filter
       router.push(`/research?topic=${encodeURIComponent(topic)}`);
     }
