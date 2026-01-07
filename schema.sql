@@ -53,3 +53,6 @@ CREATE INDEX IF NOT EXISTS idx_analytics_timestamp ON analytics_events(timestamp
 
 -- Index for faster queries by topic
 CREATE INDEX IF NOT EXISTS idx_analytics_topic ON analytics_events(topic);
+
+-- Index for faster queries by country
+CREATE INDEX IF NOT EXISTS idx_analytics_country ON analytics_events(country);

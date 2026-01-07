@@ -133,6 +133,62 @@ export async function getAnalyticsSummary(days = 30) {
       .bind(cutoffDateStr)
       .all<{ date: string; count: number }>();
 
+    // Top countries
+    const topCountries = await DB.prepare(
+      `SELECT country, COUNT(*) as visitors
+       FROM analytics_events
+       WHERE country IS NOT NULL AND country != '' AND timestamp >= ?
+       GROUP BY country
+       ORDER BY visitors DESC
+       LIMIT 10`,
+    )
+      .bind(cutoffDateStr)
+      .all<{ country: string; visitors: number }>();
+
+    // Top referrers
+    const topReferrers = await DB.prepare(
+      `SELECT referrer, COUNT(*) as visits
+       FROM analytics_events
+       WHERE referrer IS NOT NULL AND referrer != '' AND timestamp >= ?
+       GROUP BY referrer
+       ORDER BY visits DESC
+       LIMIT 10`,
+    )
+      .bind(cutoffDateStr)
+      .all<{ referrer: string; visits: number }>();
+
+    // Device and browser data (we'll parse this in the component)
+    const userAgents = await DB.prepare(
+      `SELECT user_agent, COUNT(*) as count
+       FROM analytics_events
+       WHERE user_agent IS NOT NULL AND user_agent != '' AND timestamp >= ?
+       GROUP BY user_agent`,
+    )
+      .bind(cutoffDateStr)
+      .all<{ user_agent: string; count: number }>();
+
+    // Hour of day activity
+    const hourlyActivity = await DB.prepare(
+      `SELECT CAST(strftime('%H', timestamp) AS INTEGER) as hour, COUNT(*) as count
+       FROM analytics_events
+       WHERE timestamp >= ?
+       GROUP BY hour
+       ORDER BY hour`,
+    )
+      .bind(cutoffDateStr)
+      .all<{ hour: number; count: number }>();
+
+    // Day of week activity
+    const dailyActivity = await DB.prepare(
+      `SELECT CAST(strftime('%w', timestamp) AS INTEGER) as day, COUNT(*) as count
+       FROM analytics_events
+       WHERE timestamp >= ?
+       GROUP BY day
+       ORDER BY day`,
+    )
+      .bind(cutoffDateStr)
+      .all<{ day: number; count: number }>();
+
     return {
       summary: {
         totalEvents: totalEvents?.count || 0,
@@ -144,6 +200,11 @@ export async function getAnalyticsSummary(days = 30) {
       topArticles: topArticles.results || [],
       topTopics: topTopics.results || [],
       eventsByDay: eventsByDay.results || [],
+      topCountries: topCountries.results || [],
+      topReferrers: topReferrers.results || [],
+      userAgents: userAgents.results || [],
+      hourlyActivity: hourlyActivity.results || [],
+      dailyActivity: dailyActivity.results || [],
     };
   } catch (error) {
     console.error('Analytics summary error:', error);
@@ -153,6 +214,11 @@ export async function getAnalyticsSummary(days = 30) {
       topArticles: [],
       topTopics: [],
       eventsByDay: [],
+      topCountries: [],
+      topReferrers: [],
+      userAgents: [],
+      hourlyActivity: [],
+      dailyActivity: [],
     };
   }
 }
