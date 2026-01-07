@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { FileText, Settings, BarChart3, Users } from 'lucide-react';
+import { FileText, Settings, BarChart3, Target, TrendingUp, Activity } from 'lucide-react';
 
 export default function AdminDashboard() {
   return (
@@ -37,28 +37,6 @@ export default function AdminDashboard() {
             </div>
           </Link>
 
-          {/* Upload New Article */}
-          <Link
-            href="/admin/research/upload"
-            className="group bg-white rounded-xl shadow-sm border border-gray-200 p-8 hover:shadow-md hover:border-green-300 transition-all"
-          >
-            <div className="flex items-center gap-4 mb-4">
-              <div className="bg-green-100 p-4 rounded-full group-hover:bg-green-200 transition-colors">
-                <FileText className="w-8 h-8 text-green-600" />
-              </div>
-              <h2 className="text-2xl font-bold text-gray-900 group-hover:text-green-600 transition-colors">
-                Upload
-              </h2>
-            </div>
-            <p className="text-gray-600 mb-4">
-              Upload a new research PDF and let AI generate an article automatically.
-            </p>
-            <div className="flex items-center gap-4 text-sm text-gray-500">
-              <span>Upload new article</span>
-              <span>→</span>
-            </div>
-          </Link>
-
           {/* Analytics */}
           <Link
             href="/admin/analytics"
@@ -81,16 +59,48 @@ export default function AdminDashboard() {
             </div>
           </Link>
 
-          {/* Members (Coming Soon) */}
+          {/* Thesis Management (Coming Soon) */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 opacity-60">
             <div className="flex items-center gap-4 mb-4">
               <div className="bg-gray-100 p-4 rounded-full">
-                <Users className="w-8 h-8 text-gray-400" />
+                <Target className="w-8 h-8 text-gray-400" />
               </div>
-              <h2 className="text-2xl font-bold text-gray-900">Members</h2>
+              <h2 className="text-2xl font-bold text-gray-900">Thesis</h2>
             </div>
             <p className="text-gray-600 mb-4">
-              Manage community members, permissions, and member communications.
+              Manage investment theses, track positions, and monitor performance against targets.
+            </p>
+            <div className="flex items-center gap-4 text-sm text-gray-400">
+              <span>Coming soon</span>
+            </div>
+          </div>
+
+          {/* Regime Analysis (Coming Soon) */}
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 opacity-60">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="bg-gray-100 p-4 rounded-full">
+                <TrendingUp className="w-8 h-8 text-gray-400" />
+              </div>
+              <h2 className="text-2xl font-bold text-gray-900">Regime</h2>
+            </div>
+            <p className="text-gray-600 mb-4">
+              Analyze market regimes, identify transitions, and adjust strategy accordingly.
+            </p>
+            <div className="flex items-center gap-4 text-sm text-gray-400">
+              <span>Coming soon</span>
+            </div>
+          </div>
+
+          {/* Cycle Analysis (Coming Soon) */}
+          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 opacity-60">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="bg-gray-100 p-4 rounded-full">
+                <Activity className="w-8 h-8 text-gray-400" />
+              </div>
+              <h2 className="text-2xl font-bold text-gray-900">Cycle</h2>
+            </div>
+            <p className="text-gray-600 mb-4">
+              Track market cycles, economic indicators, and timing signals for portfolio positioning.
             </p>
             <div className="flex items-center gap-4 text-sm text-gray-400">
               <span>Coming soon</span>
@@ -106,7 +116,7 @@ export default function AdminDashboard() {
               <h2 className="text-2xl font-bold text-gray-900">Settings</h2>
             </div>
             <p className="text-gray-600 mb-4">
-              Configure website settings, integrations, and admin preferences.
+              Configure website settings, integrations, admin preferences, and access control.
             </p>
             <div className="flex items-center gap-4 text-sm text-gray-400">
               <span>Coming soon</span>
