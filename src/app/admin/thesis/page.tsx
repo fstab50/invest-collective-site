@@ -9,15 +9,15 @@ export default function ThesisManagementPage() {
         <div className="mb-8">
           <Link
             href="/admin"
-            className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors mb-4"
+            className="inline-flex items-center gap-2 text-amber-600 hover:text-amber-700 transition-colors mb-4"
           >
             <ChevronLeft className="w-5 h-5" />
             <span>Back to Admin Dashboard</span>
           </Link>
 
           <div className="flex items-center gap-3 mb-2">
-            <div className="bg-blue-100 p-3 rounded-full">
-              <Target className="w-6 h-6 text-blue-600" />
+            <div className="bg-amber-100 p-3 rounded-full">
+              <Target className="w-6 h-6 text-amber-600" />
             </div>
             <h1 className="text-3xl font-bold text-gray-900">Thesis Management</h1>
           </div>
@@ -25,9 +25,9 @@ export default function ThesisManagementPage() {
         </div>
 
         {/* Coming Soon Notice */}
-        <div className="bg-blue-50 border border-blue-200 rounded-xl p-6 mb-8">
-          <h3 className="text-lg font-semibold text-blue-900 mb-2">Coming Soon</h3>
-          <p className="text-blue-800 mb-4">
+        <div className="bg-amber-50 border border-amber-200 rounded-xl p-6 mb-8">
+          <h3 className="text-lg font-semibold text-amber-900 mb-2">Coming Soon</h3>
+          <p className="text-amber-800 mb-4">
             This section is under development. Below are some features we plan to implement.
           </p>
         </div>
@@ -153,7 +153,7 @@ export default function ThesisManagementPage() {
         <div className="mt-8">
           <Link
             href="/admin"
-            className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors"
+            className="inline-flex items-center gap-2 text-amber-600 hover:text-amber-700 transition-colors"
           >
             ← Back to Admin Dashboard
           </Link>

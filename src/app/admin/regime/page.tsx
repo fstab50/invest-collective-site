@@ -9,15 +9,15 @@ export default function RegimeManagementPage() {
         <div className="mb-8">
           <Link
             href="/admin"
-            className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors mb-4"
+            className="inline-flex items-center gap-2 text-rose-600 hover:text-rose-700 transition-colors mb-4"
           >
             <ChevronLeft className="w-5 h-5" />
             <span>Back to Admin Dashboard</span>
           </Link>
 
           <div className="flex items-center gap-3 mb-2">
-            <div className="bg-purple-100 p-3 rounded-full">
-              <TrendingUp className="w-6 h-6 text-purple-600" />
+            <div className="bg-rose-100 p-3 rounded-full">
+              <TrendingUp className="w-6 h-6 text-rose-600" />
             </div>
             <h1 className="text-3xl font-bold text-gray-900">Regime Analysis</h1>
           </div>
@@ -25,9 +25,9 @@ export default function RegimeManagementPage() {
         </div>
 
         {/* Coming Soon Notice */}
-        <div className="bg-purple-50 border border-purple-200 rounded-xl p-6 mb-8">
-          <h3 className="text-lg font-semibold text-purple-900 mb-2">Coming Soon</h3>
-          <p className="text-purple-800 mb-4">
+        <div className="bg-rose-50 border border-rose-200 rounded-xl p-6 mb-8">
+          <h3 className="text-lg font-semibold text-rose-900 mb-2">Coming Soon</h3>
+          <p className="text-rose-800 mb-4">
             This section is under development. Below are some features we plan to implement.
           </p>
         </div>
@@ -153,7 +153,7 @@ export default function RegimeManagementPage() {
         <div className="mt-8">
           <Link
             href="/admin"
-            className="inline-flex items-center gap-2 text-blue-600 hover:text-blue-700 transition-colors"
+            className="inline-flex items-center gap-2 text-rose-600 hover:text-rose-700 transition-colors"
           >
             ← Back to Admin Dashboard
           </Link>
