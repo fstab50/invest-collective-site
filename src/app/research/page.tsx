@@ -1,7 +1,8 @@
 import { getCloudflareContext } from '@opennextjs/cloudflare';
 import Link from 'next/link';
-import { FileText, Calendar, Tag, Download } from 'lucide-react';
+import { FileText, Calendar, Tag } from 'lucide-react';
 import { TopicFilter } from './components/TopicFilter';
+import { PDFDownloadButton } from '@/components/PDFDownloadButton';
 
 // Note: Do not use 'edge' runtime with OpenNext Cloudflare
 // The worker runtime is automatically used for all routes
@@ -182,15 +183,7 @@ export default async function ResearchPage({
                         >
                           Read Article
                         </Link>
-                        <a
-                          href={article.pdf_url}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors font-medium text-sm text-gray-700"
-                        >
-                          <Download className="w-4 h-4" />
-                          PDF
-                        </a>
+                        <PDFDownloadButton pdfUrl={article.pdf_url} articleSlug={article.slug} size="small" />
                       </div>
                     </div>
                   </article>
