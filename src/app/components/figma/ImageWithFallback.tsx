@@ -13,6 +13,7 @@ interface ImageWithFallbackProps {
   style?: React.CSSProperties;
   width?: number;
   height?: number;
+  priority?: boolean;
 }
 
 export function ImageWithFallback({
@@ -22,6 +23,7 @@ export function ImageWithFallback({
   style,
   width = 1080,
   height = 720,
+  priority = false,
 }: ImageWithFallbackProps) {
   const [didError, setDidError] = useState(false);
 
@@ -46,6 +48,7 @@ export function ImageWithFallback({
       height={height}
       className={className}
       style={style}
+      priority={priority}
       onError={handleError}
     />
   );

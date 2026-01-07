@@ -40,6 +40,7 @@ export default function Page() {
                 src="/images/hero-business-meeting.jpg"
                 alt="Group discussion"
                 className="rounded-2xl shadow-2xl"
+                priority={true}
               />
             </div>
           </div>
