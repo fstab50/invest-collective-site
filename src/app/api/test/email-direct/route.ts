@@ -11,10 +11,9 @@ export async function GET(request: NextRequest) {
       },
       body: JSON.stringify({
         access_key: '646715cb-7883-4f01-b624-002d1cee543f',
-        subject: 'Direct API Test',
-        from_name: 'Test',
+        name: 'Test User',
         email: 'test@example.com',
-        message: 'This is a direct test of the Web3Forms API',
+        message: 'This is a direct test of the Web3Forms API from Cloudflare Workers',
       }),
     });
 
