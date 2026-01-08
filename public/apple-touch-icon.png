@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" width="180" height="180">
+  <!-- Background with rounded corners for iOS -->
+  <rect width="180" height="180" rx="40" fill="#2563eb"/>
+
+  <!-- Trending up arrow design (scaled up) -->
+  <g fill="none" stroke="#ffffff" stroke-width="12" stroke-linecap="round" stroke-linejoin="round">
+    <!-- Chart line -->
+    <polyline points="35,125 65,95 90,105 120,65 150,50"/>
+    <!-- Arrow head -->
+    <polyline points="125,50 150,50 150,75"/>
+  </g>
+
+  <!-- Accent dots for visual interest -->
+  <circle cx="65" cy="95" r="8" fill="#ffffff"/>
+  <circle cx="90" cy="105" r="8" fill="#ffffff"/>
+</svg>

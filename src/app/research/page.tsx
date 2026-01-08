@@ -1,0 +1,198 @@
+import { getCloudflareContext } from '@opennextjs/cloudflare';
+import Link from 'next/link';
+import { FileText, Calendar, Tag } from 'lucide-react';
+import { TopicFilter } from './components/TopicFilter';
+import { PDFDownloadButton } from '@/components/PDFDownloadButton';
+
+// Note: Do not use 'edge' runtime with OpenNext Cloudflare
+// The worker runtime is automatically used for all routes
+
+interface Article {
+  id: number;
+  slug: string;
+  title: string;
+  date: string;
+  topics: string;
+  summary: string;
+  pdf_url: string;
+}
+
+async function getArticles(): Promise<Article[]> {
+  try {
+    const { env } = getCloudflareContext();
+    const { DB } = env;
+
+    const { results } = await DB.prepare(
+      `SELECT id, slug, title, date, topics, summary, pdf_url
+       FROM articles
+       WHERE status = 'published'
+       ORDER BY date DESC`,
+    ).all<Article>();
+
+    return results || [];
+  } catch (error) {
+    console.error('Failed to fetch articles:', error);
+    return [];
+  }
+}
+
+function getAllTopics(articles: Article[]): string[] {
+  const topicSet = new Set<string>();
+
+  articles.forEach((article) => {
+    const topics = JSON.parse(article.topics) as string[];
+    topics.forEach((topic) => topicSet.add(topic));
+  });
+
+  return Array.from(topicSet).sort();
+}
+
+function filterArticlesByTopic(articles: Article[], topic: string | null): Article[] {
+  if (!topic) return articles;
+
+  return articles.filter((article) => {
+    const topics = JSON.parse(article.topics) as string[];
+    return topics.includes(topic);
+  });
+}
+
+export default async function ResearchPage({
+  searchParams,
+}: {
+  searchParams: { topic?: string };
+}) {
+  const allArticles = await getArticles();
+  const allTopics = getAllTopics(allArticles);
+  const selectedTopic = searchParams.topic || null;
+  const articles = filterArticlesByTopic(allArticles, selectedTopic);
+
+  return (
+    <div className="min-h-screen bg-gray-50 py-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="text-center mb-12">
+          <div className="flex justify-center mb-4">
+            <div className="bg-blue-100 p-4 rounded-full">
+              <FileText className="w-8 h-8 text-blue-600" />
+            </div>
+          </div>
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Research Library</h1>
+          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+            In-depth market analysis, investment theses, and economic research from our community.
+          </p>
+        </div>
+
+        {/* Topic Filter */}
+        {allArticles.length > 0 && <TopicFilter allTopics={allTopics} />}
+
+        {/* Articles Grid */}
+        {articles.length === 0 ? (
+          <div className="text-center py-16">
+            <FileText className="w-16 h-16 text-gray-300 mx-auto mb-4" />
+            {selectedTopic ? (
+              <>
+                <p className="text-gray-500 text-lg">No articles found with topic &quot;{selectedTopic}&quot;</p>
+                <p className="text-gray-400 text-sm mt-2">Try selecting a different topic or clear the filter.</p>
+              </>
+            ) : (
+              <>
+                <p className="text-gray-500 text-lg">No research articles published yet.</p>
+                <p className="text-gray-400 text-sm mt-2">Check back soon for new content!</p>
+              </>
+            )}
+          </div>
+        ) : (
+          <>
+            {/* Results count */}
+            <div className="mb-6">
+              <p className="text-gray-600">
+                {selectedTopic ? (
+                  <>
+                    Showing <span className="font-semibold">{articles.length}</span> article
+                    {articles.length !== 1 ? 's' : ''} tagged with &quot;{selectedTopic}&quot;
+                  </>
+                ) : (
+                  <>
+                    <span className="font-semibold">{articles.length}</span> article
+                    {articles.length !== 1 ? 's' : ''} available
+                  </>
+                )}
+              </p>
+            </div>
+
+            <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+              {articles.map((article) => {
+                const topics = JSON.parse(article.topics) as string[];
+
+                return (
+                  <article
+                    key={article.id}
+                    className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden hover:shadow-md transition-shadow"
+                  >
+                    <div className="p-6">
+                      {/* Date */}
+                      <div className="flex items-center gap-2 text-sm text-gray-500 mb-3">
+                        <Calendar className="w-4 h-4" />
+                        <time dateTime={article.date}>
+                          {new Date(article.date).toLocaleDateString('en-US', {
+                            year: 'numeric',
+                            month: 'long',
+                            day: 'numeric',
+                          })}
+                        </time>
+                      </div>
+
+                      {/* Title */}
+                      <Link href={`/research/${article.slug}`}>
+                        <h2 className="text-xl font-bold text-gray-900 mb-3 hover:text-blue-600 transition-colors">
+                          {article.title}
+                        </h2>
+                      </Link>
+
+                      {/* Summary */}
+                      <p className="text-gray-600 mb-4 line-clamp-3">{article.summary}</p>
+
+                      {/* Topics */}
+                      <div className="flex items-start gap-2 mb-4">
+                        <Tag className="w-4 h-4 text-gray-400 mt-1 shrink-0" />
+                        <div className="flex flex-wrap gap-2">
+                          {topics.map((topic, index) => {
+                            const isActive = selectedTopic === topic;
+                            return (
+                              <Link
+                                key={index}
+                                href={`/research?topic=${encodeURIComponent(topic)}`}
+                                className={`inline-block px-2 py-1 text-xs font-medium rounded transition-colors ${
+                                  isActive
+                                    ? 'bg-blue-600 text-white'
+                                    : 'bg-blue-100 text-blue-700 hover:bg-blue-200'
+                                }`}
+                              >
+                                {topic}
+                              </Link>
+                            );
+                          })}
+                        </div>
+                      </div>
+
+                      {/* Actions */}
+                      <div className="flex gap-3 pt-4 border-t border-gray-100">
+                        <Link
+                          href={`/research/${article.slug}`}
+                          className="flex-1 text-center bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors font-medium text-sm"
+                        >
+                          Read Article
+                        </Link>
+                        <PDFDownloadButton pdfUrl={article.pdf_url} articleSlug={article.slug} size="small" />
+                      </div>
+                    </div>
+                  </article>
+                );
+              })}
+            </div>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
