@@ -55,8 +55,22 @@ export async function sendNewApplicationNotification(
 
     console.log('[EMAIL] Response status:', response.status, response.statusText);
 
-    const data = await response.json();
-    console.log('[EMAIL] Response data:', JSON.stringify(data));
+    // Get response as text first to handle non-JSON responses
+    const responseText = await response.text();
+    console.log('[EMAIL] Response text:', responseText);
+
+    // Try to parse as JSON
+    let data;
+    try {
+      data = JSON.parse(responseText);
+      console.log('[EMAIL] Parsed JSON data:', JSON.stringify(data));
+    } catch (parseError) {
+      console.error('[EMAIL] Failed to parse response as JSON, got:', responseText.substring(0, 200));
+      return {
+        success: false,
+        error: 'Web3Forms returned non-JSON response (possible error page)',
+      };
+    }
 
     if (!response.ok) {
       console.error('[EMAIL] HTTP error:', response.status, data);
