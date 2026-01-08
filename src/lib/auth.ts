@@ -41,14 +41,6 @@ export async function getAuthInfo(): Promise<{
   const jwt = headersList.get('cf-access-jwt-assertion');
   const email = headersList.get('cf-access-authenticated-user-email');
 
-  // Debug logging in production
-  console.log('[Auth Debug] Headers check:', {
-    hasJwt: !!jwt,
-    hasEmail: !!email,
-    email: email || 'none',
-    allHeaders: Array.from(headersList.entries()).map(([key]) => key).filter(k => k.startsWith('cf-')),
-  });
-
   // If we have Cloudflare Access headers, use them and update cookie
   if (jwt && email) {
     try {
@@ -117,9 +109,7 @@ export async function getAuthInfo(): Promise<{
 
   if (authCookie?.value) {
     try {
-      const authInfo = JSON.parse(authCookie.value);
-      console.log('[Auth Debug] Using auth from cookie:', { email: authInfo.email });
-      return authInfo;
+      return JSON.parse(authCookie.value);
     } catch (error) {
       console.error('Failed to parse auth cookie:', error);
       return null;
