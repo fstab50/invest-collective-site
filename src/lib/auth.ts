@@ -41,6 +41,14 @@ export async function getAuthInfo(): Promise<{
   const jwt = headersList.get('cf-access-jwt-assertion');
   const email = headersList.get('cf-access-authenticated-user-email');
 
+  // Debug logging in production
+  console.log('[Auth Debug] Headers check:', {
+    hasJwt: !!jwt,
+    hasEmail: !!email,
+    email: email || 'none',
+    allHeaders: Array.from(headersList.entries()).map(([key]) => key).filter(k => k.startsWith('cf-')),
+  });
+
   if (!jwt || !email) {
     return null;
   }
