@@ -1,8 +1,11 @@
-import { headers, cookies } from 'next/headers';
+import { headers } from 'next/headers';
 
 /**
- * Get authentication information from Cloudflare Access headers or cookies
+ * Get authentication information from Cloudflare Access headers
  * Returns null if not authenticated
+ *
+ * Note: Cloudflare Access only sends headers on protected routes (/admin*).
+ * This means auth status will only show when on admin pages.
  */
 export async function getAuthInfo(): Promise<{
   isAuthenticated: boolean;
@@ -24,80 +27,36 @@ export async function getAuthInfo(): Promise<{
   const jwt = headersList.get('cf-access-jwt-assertion');
   const email = headersList.get('cf-access-authenticated-user-email');
 
-  // If we have Cloudflare Access headers, use them and update cookie
-  if (jwt && email) {
-    try {
-      // Decode JWT payload (without verification - Cloudflare has already verified it)
-      // JWT format: header.payload.signature
-      const parts = jwt.split('.');
-      let authInfo: {
-        isAuthenticated: boolean;
-        email: string;
-        userId?: string;
-        groups?: string[];
-      };
+  if (!jwt || !email) {
+    return null;
+  }
 
-      if (parts.length !== 3) {
-        // Malformed JWT but we have email from header
-        authInfo = {
-          isAuthenticated: true,
-          email: email,
-        };
-      } else {
-        const payload = JSON.parse(Buffer.from(parts[1], 'base64').toString('utf8'));
-        authInfo = {
-          isAuthenticated: true,
-          email: email, // Use email from header (more reliable)
-          userId: payload.sub,
-          groups: payload.groups || [],
-        };
-      }
-
-      // Store auth info in cookie for persistence across non-protected pages
-      const cookieStore = await cookies();
-      cookieStore.set('cf-auth-info', JSON.stringify(authInfo), {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'lax',
-        maxAge: 60 * 60 * 24, // 24 hours
-        path: '/',
-      });
-
-      return authInfo;
-    } catch (error) {
-      console.error('Failed to decode Cloudflare Access JWT:', error);
-      // Still authenticated, use email from header
-      const authInfo = {
+  try {
+    // Decode JWT payload (without verification - Cloudflare has already verified it)
+    // JWT format: header.payload.signature
+    const parts = jwt.split('.');
+    if (parts.length !== 3) {
+      // Malformed JWT but we have email from header
+      return {
         isAuthenticated: true,
         email: email,
       };
-
-      // Store in cookie
-      const cookieStore = await cookies();
-      cookieStore.set('cf-auth-info', JSON.stringify(authInfo), {
-        httpOnly: true,
-        secure: true,
-        sameSite: 'lax',
-        maxAge: 60 * 60 * 24,
-        path: '/',
-      });
-
-      return authInfo;
     }
+
+    const payload = JSON.parse(Buffer.from(parts[1], 'base64').toString('utf8'));
+
+    return {
+      isAuthenticated: true,
+      email: email, // Use email from header (more reliable)
+      userId: payload.sub,
+      groups: payload.groups || [],
+    };
+  } catch (error) {
+    console.error('Failed to decode Cloudflare Access JWT:', error);
+    // Still authenticated, use email from header
+    return {
+      isAuthenticated: true,
+      email: email,
+    };
   }
-
-  // No headers present, check cookie for previously authenticated state
-  const cookieStore = await cookies();
-  const authCookie = cookieStore.get('cf-auth-info');
-
-  if (authCookie?.value) {
-    try {
-      return JSON.parse(authCookie.value);
-    } catch (error) {
-      console.error('Failed to parse auth cookie:', error);
-      return null;
-    }
-  }
-
-  return null;
 }
