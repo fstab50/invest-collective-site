@@ -55,6 +55,8 @@ export default function SignupPage() {
 
       if (result.success) {
         setSubmitStatus('success');
+        // Scroll to top to show success message
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         setFormData({
           name: '',
           email: '',
@@ -71,10 +73,14 @@ export default function SignupPage() {
       } else {
         setSubmitStatus('error');
         setErrorMessage(result.error || 'There was an error submitting your application.');
+        // Scroll to top to show error message
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     } catch (error) {
       setSubmitStatus('error');
       setErrorMessage('There was an error submitting your application. Please try again.');
+      // Scroll to top to show error message
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     } finally {
       setIsSubmitting(false);
     }
@@ -102,10 +108,25 @@ export default function SignupPage() {
 
           {/* Success Message */}
           {submitStatus === 'success' && (
-            <div className="mb-8 p-4 bg-green-50 border border-green-200 rounded-lg">
-              <p className="text-green-800 font-medium">
-                Thank you for your application! We&aposll review it and get back to you within 2-3 business days.
+            <div className="mb-8 p-6 bg-green-50 border-2 border-green-300 rounded-lg">
+              <h3 className="text-xl font-bold text-green-900 mb-2">Application Submitted Successfully!</h3>
+              <p className="text-green-800">
+                Thank you for your application! We&apos;ll review it and get back to you within 2-3 business days.
               </p>
+              <div className="mt-4 flex gap-4">
+                <Link
+                  href="/"
+                  className="flex-1 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors font-medium text-center"
+                >
+                  Return to Homepage
+                </Link>
+                <button
+                  onClick={() => setSubmitStatus('idle')}
+                  className="flex-1 bg-white text-green-700 border-2 border-green-600 px-6 py-3 rounded-lg hover:bg-green-50 transition-colors font-medium"
+                >
+                  Submit Another Application
+                </button>
+              </div>
             </div>
           )}
 
@@ -119,7 +140,7 @@ export default function SignupPage() {
           )}
 
           {/* Form */}
-          <form onSubmit={handleSubmit} className="space-y-8">
+          <form onSubmit={handleSubmit} className={`space-y-8 ${submitStatus === 'success' ? 'opacity-50 pointer-events-none' : ''}`}>
             {/* Personal Information */}
             <div>
               <h2 className="text-2xl font-bold text-gray-900 mb-6 pb-2 border-b border-gray-200">
