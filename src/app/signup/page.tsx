@@ -113,19 +113,13 @@ export default function SignupPage() {
               <p className="text-green-800">
                 Thank you for your application! We&apos;ll review it and get back to you within 2-3 business days.
               </p>
-              <div className="mt-4 flex gap-4">
+              <div className="mt-4">
                 <Link
                   href="/"
-                  className="flex-1 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition-colors font-medium text-center"
+                  className="inline-block bg-green-600 text-white px-8 py-3 rounded-lg hover:bg-green-700 transition-colors font-medium text-center"
                 >
                   Return to Homepage
                 </Link>
-                <button
-                  onClick={() => setSubmitStatus('idle')}
-                  className="flex-1 bg-white text-green-700 border-2 border-green-600 px-6 py-3 rounded-lg hover:bg-green-50 transition-colors font-medium"
-                >
-                  Submit Another Application
-                </button>
               </div>
             </div>
           )}
