@@ -22,53 +22,67 @@ interface MemberApplication {
 export async function sendNewApplicationNotification(
   application: MemberApplication,
 ): Promise<{ success: boolean; error?: string }> {
+  console.log('[EMAIL] Starting to send notification for:', application.email);
+
   try {
+    const payload = {
+      access_key: '646715cb-7883-4f01-b624-002d1cee543f', // Web3Forms public key
+      subject: 'New Invest Collective Application',
+      from_name: application.name,
+      // Include all application fields in the email body
+      name: application.name,
+      email: application.email,
+      phone: application.phone,
+      yearsInvesting: application.years_investing,
+      tradingStyle: application.trading_style,
+      areasOfExpertise: application.areas_of_expertise,
+      macroeconomicsKnowledge: application.macro_knowledge,
+      portfolioSize: application.portfolio_size,
+      investingExperience: application.investment_journey,
+      expectations: application.expectations,
+      referralSource: application.referral_source || 'Not specified',
+    };
+
+    console.log('[EMAIL] Sending payload to Web3Forms:', JSON.stringify(payload));
+
     const response = await fetch('https://api.web3forms.com/submit', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        access_key: '646715cb-7883-4f01-b624-002d1cee543f', // Web3Forms public key
-        subject: 'New Invest Collective Application',
-        from_name: application.name,
-        // Include all application fields in the email body
-        name: application.name,
-        email: application.email,
-        phone: application.phone,
-        yearsInvesting: application.years_investing,
-        tradingStyle: application.trading_style,
-        areasOfExpertise: application.areas_of_expertise,
-        macroeconomicsKnowledge: application.macro_knowledge,
-        portfolioSize: application.portfolio_size,
-        investingExperience: application.investment_journey,
-        expectations: application.expectations,
-        referralSource: application.referral_source || 'Not specified',
-      }),
+      body: JSON.stringify(payload),
     });
 
+    console.log('[EMAIL] Response status:', response.status, response.statusText);
+
+    const data = await response.json();
+    console.log('[EMAIL] Response data:', JSON.stringify(data));
+
     if (!response.ok) {
-      const errorData = await response.json().catch(() => null);
-      console.error('Web3Forms error response:', errorData);
+      console.error('[EMAIL] HTTP error:', response.status, data);
       return {
         success: false,
-        error: errorData?.message || `HTTP ${response.status}: ${response.statusText}`,
+        error: data?.message || `HTTP ${response.status}: ${response.statusText}`,
       };
     }
 
-    const data = await response.json();
-
     if (!data.success) {
-      console.error('Web3Forms returned success=false:', data);
+      console.error('[EMAIL] Web3Forms returned success=false:', data);
       return {
         success: false,
         error: data.message || 'Email service returned failure',
       };
     }
 
+    console.log('[EMAIL] Email sent successfully!');
     return { success: true };
   } catch (error) {
-    console.error('Failed to send email notification:', error);
+    console.error('[EMAIL] Exception caught:', error);
+    console.error('[EMAIL] Error details:', {
+      name: error instanceof Error ? error.name : 'unknown',
+      message: error instanceof Error ? error.message : String(error),
+      stack: error instanceof Error ? error.stack : undefined,
+    });
     return {
       success: false,
       error: error instanceof Error ? error.message : 'Unknown error',

@@ -84,6 +84,7 @@ export async function saveApplication(formData: FormData) {
     }
 
     // Send email notification to admin (best effort - don't fail if this fails)
+    console.log('[SIGNUP] About to send email notification');
     const emailResult = await sendNewApplicationNotification({
       name,
       email,
@@ -98,8 +99,10 @@ export async function saveApplication(formData: FormData) {
       referral_source: referral_source || undefined,
     });
 
+    console.log('[SIGNUP] Email result:', emailResult);
+
     if (!emailResult.success) {
-      console.error('Failed to send email notification:', emailResult.error);
+      console.error('[SIGNUP] Failed to send email notification:', emailResult.error);
       // Continue anyway - the application is saved in the database
     }
 
