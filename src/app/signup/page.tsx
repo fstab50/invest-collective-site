@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { ChevronLeft } from 'lucide-react';
+import { saveApplication } from './actions';
 
 export default function SignupPage() {
   const [formData, setFormData] = useState({
@@ -21,6 +22,7 @@ export default function SignupPage() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     setFormData({
@@ -33,22 +35,25 @@ export default function SignupPage() {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus('idle');
+    setErrorMessage('');
 
     try {
-      const response = await fetch('https://api.web3forms.com/submit', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          access_key: process.env.NEXT_PUBLIC_WEB3FORMS_KEY || '646715cb-7883-4f01-b624-002d1cee543f',
-          subject: 'New Invest Collective Application',
-          from_name: formData.name,
-          ...formData,
-        }),
-      });
+      const formDataObj = new FormData();
+      formDataObj.append('name', formData.name);
+      formDataObj.append('email', formData.email);
+      formDataObj.append('phone', formData.phone);
+      formDataObj.append('yearsInvesting', formData.yearsInvesting);
+      formDataObj.append('tradingStyle', formData.tradingStyle);
+      formDataObj.append('areasOfExpertise', formData.areasOfExpertise);
+      formDataObj.append('macroKnowledge', formData.macroeconomicsKnowledge);
+      formDataObj.append('portfolioSize', formData.portfolioSize);
+      formDataObj.append('investmentJourney', formData.investingExperience);
+      formDataObj.append('expectations', formData.expectations);
+      formDataObj.append('referralSource', formData.referralSource);
 
-      if (response.ok) {
+      const result = await saveApplication(formDataObj);
+
+      if (result.success) {
         setSubmitStatus('success');
         setFormData({
           name: '',
@@ -65,9 +70,11 @@ export default function SignupPage() {
         });
       } else {
         setSubmitStatus('error');
+        setErrorMessage(result.error || 'There was an error submitting your application.');
       }
     } catch (error) {
       setSubmitStatus('error');
+      setErrorMessage('There was an error submitting your application. Please try again.');
     } finally {
       setIsSubmitting(false);
     }
@@ -106,7 +113,7 @@ export default function SignupPage() {
           {submitStatus === 'error' && (
             <div className="mb-8 p-4 bg-red-50 border border-red-200 rounded-lg">
               <p className="text-red-800 font-medium">
-                There was an error submitting your application. Please try again or contact us directly.
+                {errorMessage || 'There was an error submitting your application. Please try again or contact us directly.'}
               </p>
             </div>
           )}

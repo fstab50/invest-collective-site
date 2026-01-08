@@ -56,3 +56,41 @@ CREATE INDEX IF NOT EXISTS idx_analytics_topic ON analytics_events(topic);
 
 -- Index for faster queries by country
 CREATE INDEX IF NOT EXISTS idx_analytics_country ON analytics_events(country);
+
+-- Members table for signup applications and member management
+CREATE TABLE IF NOT EXISTS members (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  -- Personal Information
+  name TEXT NOT NULL,
+  email TEXT NOT NULL UNIQUE,
+  phone TEXT NOT NULL,
+  -- Investment Background
+  years_investing TEXT NOT NULL,           -- 'less-than-1', '1-3', '3-5', '5-10', '10-plus'
+  trading_style TEXT NOT NULL,             -- 'day-trading', 'swing-trading', 'long-term-investing', 'options-trading', 'other'
+  areas_of_expertise TEXT NOT NULL,        -- Long text field describing expertise
+  macro_knowledge TEXT NOT NULL,           -- 'beginner', 'intermediate', 'advanced', 'expert'
+  portfolio_size TEXT NOT NULL,            -- 'under-10k', '10k-50k', '50k-100k', '100k-500k', '500k-plus'
+  -- Application Content
+  investment_journey TEXT NOT NULL,        -- Long text: user's investing experience
+  expectations TEXT NOT NULL,              -- Long text: what they hope to gain/contribute
+  referral_source TEXT,                    -- Optional: how they heard about us
+  -- Admin Fields
+  status TEXT NOT NULL DEFAULT 'pending',  -- 'pending', 'approved', 'active'
+  admin_notes TEXT,                        -- Admin comments and notes
+  reviewed_by TEXT,                        -- Admin who reviewed the application
+  reviewed_at TEXT,                        -- When the application was reviewed
+  approved_at TEXT,                        -- When the application was approved
+  activated_at TEXT,                       -- When the member was activated
+  -- Metadata
+  created_at TEXT NOT NULL DEFAULT (datetime('now')),
+  updated_at TEXT NOT NULL DEFAULT (datetime('now'))
+);
+
+-- Index for faster lookups by email
+CREATE INDEX IF NOT EXISTS idx_members_email ON members(email);
+
+-- Index for filtering by status
+CREATE INDEX IF NOT EXISTS idx_members_status ON members(status);
+
+-- Index for sorting by creation date
+CREATE INDEX IF NOT EXISTS idx_members_created_at ON members(created_at DESC);

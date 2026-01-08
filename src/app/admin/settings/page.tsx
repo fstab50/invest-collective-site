@@ -92,23 +92,22 @@ export default function SettingsPage() {
           </div>
 
           {/* Member Management */}
-          <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+          <Link
+            href="/admin/settings/members"
+            className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 hover:shadow-md hover:border-indigo-300 transition-all group"
+          >
             <div className="flex items-center gap-3 mb-4">
-              <div className="bg-indigo-100 p-3 rounded-full">
+              <div className="bg-indigo-100 p-3 rounded-full group-hover:bg-indigo-200 transition-colors">
                 <Users className="w-5 h-5 text-indigo-600" />
               </div>
-              <h3 className="text-lg font-bold text-gray-900">Member Settings</h3>
+              <h3 className="text-lg font-bold text-gray-900">Member Management</h3>
             </div>
-            <p className="text-gray-600 text-sm mb-4">
-              Configure member-related features and communication settings.
-            </p>
-            <ul className="text-sm text-gray-500 space-y-2">
-              <li>• Member database configuration</li>
-              <li>• Signup form settings</li>
-              <li>• Member communication tools</li>
-              <li>• Privacy settings</li>
-            </ul>
-          </div>
+            <p className="text-gray-600 text-sm mb-4">Review member applications and manage member accounts.</p>
+            <div className="flex items-center gap-2 text-sm text-indigo-600 group-hover:text-indigo-700">
+              <span>Manage members</span>
+              <span>→</span>
+            </div>
+          </Link>
 
           {/* Email Templates */}
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
