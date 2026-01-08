@@ -25,13 +25,37 @@ export async function sendNewApplicationNotification(
   console.log('[EMAIL] Starting to send notification for:', application.email);
 
   try {
+    // Build a message summary for Web3Forms (required field)
+    const message = `
+New Member Application
+
+Name: ${application.name}
+Email: ${application.email}
+Phone: ${application.phone}
+
+Years Investing: ${application.years_investing}
+Trading Style: ${application.trading_style}
+Areas of Expertise: ${application.areas_of_expertise}
+Macro Knowledge: ${application.macro_knowledge}
+Portfolio Size: ${application.portfolio_size}
+
+Investing Experience:
+${application.investment_journey}
+
+Expectations:
+${application.expectations}
+
+Referral Source: ${application.referral_source || 'Not specified'}
+    `.trim();
+
     const payload = {
       access_key: '646715cb-7883-4f01-b624-002d1cee543f', // Web3Forms public key
       subject: 'New Invest Collective Application',
       from_name: application.name,
-      // Include all application fields in the email body
       name: application.name,
       email: application.email,
+      message, // Web3Forms requires this field
+      // Include additional fields for reference
       phone: application.phone,
       yearsInvesting: application.years_investing,
       tradingStyle: application.trading_style,
