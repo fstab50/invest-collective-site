@@ -4,29 +4,29 @@ import { headers } from 'next/headers';
  * Check if the current request is authenticated via Cloudflare Access
  * This function should be called from Server Components or Server Actions
  */
-export function isAuthenticated(): boolean {
+export async function isAuthenticated(): Promise<boolean> {
   // In development, consider authenticated for testing
   if (process.env.NODE_ENV === 'development') {
     return true;
   }
 
-  const headersList = headers();
+  const headersList = await headers();
   const jwt = headersList.get('cf-access-jwt-assertion');
-  const clientId = headersList.get('cf-access-client-id');
+  const email = headersList.get('cf-access-authenticated-user-email');
 
-  return !!(jwt && clientId);
+  return !!(jwt && email);
 }
 
 /**
  * Get authentication information from Cloudflare Access headers
  * Returns null if not authenticated
  */
-export function getAuthInfo(): {
+export async function getAuthInfo(): Promise<{
   isAuthenticated: boolean;
   email?: string;
   userId?: string;
   groups?: string[];
-} | null {
+} | null> {
   // In development mode
   if (process.env.NODE_ENV === 'development') {
     return {
@@ -37,11 +37,11 @@ export function getAuthInfo(): {
     };
   }
 
-  const headersList = headers();
+  const headersList = await headers();
   const jwt = headersList.get('cf-access-jwt-assertion');
-  const clientId = headersList.get('cf-access-client-id');
+  const email = headersList.get('cf-access-authenticated-user-email');
 
-  if (!jwt || !clientId) {
+  if (!jwt || !email) {
     return null;
   }
 
@@ -50,21 +50,28 @@ export function getAuthInfo(): {
     // JWT format: header.payload.signature
     const parts = jwt.split('.');
     if (parts.length !== 3) {
-      return { isAuthenticated: true }; // Malformed but authenticated
+      // Malformed JWT but we have email from header
+      return {
+        isAuthenticated: true,
+        email: email,
+      };
     }
 
     const payload = JSON.parse(Buffer.from(parts[1], 'base64').toString('utf8'));
 
     return {
       isAuthenticated: true,
-      email: payload.email,
+      email: email, // Use email from header (more reliable)
       userId: payload.sub,
       groups: payload.groups || [],
     };
   } catch (error) {
     console.error('Failed to decode Cloudflare Access JWT:', error);
-    // Still authenticated, just couldn't extract user info
-    return { isAuthenticated: true };
+    // Still authenticated, use email from header
+    return {
+      isAuthenticated: true,
+      email: email,
+    };
   }
 }
 
@@ -72,7 +79,7 @@ export function getAuthInfo(): {
  * Get user email from Cloudflare Access JWT
  * Returns null if not authenticated or email not available
  */
-export function getUserEmail(): string | null {
-  const authInfo = getAuthInfo();
+export async function getUserEmail(): Promise<string | null> {
+  const authInfo = await getAuthInfo();
   return authInfo?.email || null;
 }

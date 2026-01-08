@@ -7,8 +7,8 @@ export const dynamic = 'force-dynamic';
 /**
  * Server Component wrapper that passes auth status to the client Navigation component
  */
-export function NavigationWrapper() {
-  const authInfo = getAuthInfo();
+export async function NavigationWrapper() {
+  const authInfo = await getAuthInfo();
 
   return <Navigation authInfo={authInfo} />;
 }
