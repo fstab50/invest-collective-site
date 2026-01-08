@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-export const runtime = 'edge';
-
 export async function GET(request: NextRequest) {
   console.log('[DIRECT-EMAIL-TEST] Testing direct Web3Forms API call');
 

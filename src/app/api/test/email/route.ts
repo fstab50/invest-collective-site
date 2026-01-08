@@ -1,8 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { sendNewApplicationNotification } from '@/lib/email';
 
-export const runtime = 'edge';
-
 export async function GET(request: NextRequest) {
   console.log('[EMAIL-TEST] Testing email functionality');
 
