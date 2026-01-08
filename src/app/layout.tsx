@@ -1,7 +1,7 @@
 import type { Metadata } from 'next';
 import Script from 'next/script';
 import './globals.css';
-import { Navigation } from './components/layout/Navigation';
+import { NavigationWrapper } from '@/components/NavigationWrapper';
 import { Footer } from './components/layout/Footer';
 import { PageViewTracker } from '@/components/PageViewTracker';
 
@@ -28,7 +28,7 @@ export default function RootLayout({
     <html lang="en">
       <body className="antialiased flex flex-col min-h-screen">
         <PageViewTracker />
-        <Navigation />
+        <NavigationWrapper />
         <main className="flex-1">{children}</main>
         <Footer />
 

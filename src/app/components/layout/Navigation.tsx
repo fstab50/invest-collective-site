@@ -1,10 +1,17 @@
 'use client';
 
 import Link from 'next/link';
-import { TrendingUp, Menu, X } from 'lucide-react';
+import { TrendingUp, Menu, X, User, Shield } from 'lucide-react';
 import { useEffect, useState } from 'react';
 
-export function Navigation() {
+interface AuthInfo {
+  isAuthenticated: boolean;
+  email?: string;
+  userId?: string;
+  groups?: string[];
+}
+
+export function Navigation({ authInfo }: { authInfo?: AuthInfo | null } = {}) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -77,12 +84,22 @@ export function Navigation() {
 
           {/* Mobile menu button */}
           <div className="flex items-center gap-4 md:hidden">
-            <Link
-              href="/signup"
-              className="bg-blue-600 text-white px-3 py-2 text-sm rounded-lg hover:bg-blue-700 transition-colors"
-            >
-              Join Us
-            </Link>
+            {authInfo?.isAuthenticated ? (
+              <Link
+                href="/admin"
+                className="flex items-center gap-1.5 bg-green-100 text-green-700 px-3 py-2 text-sm rounded-lg hover:bg-green-200 transition-colors"
+              >
+                <Shield className="w-4 h-4" />
+                <span className="font-medium">Admin</span>
+              </Link>
+            ) : (
+              <Link
+                href="/signup"
+                className="bg-blue-600 text-white px-3 py-2 text-sm rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Join Us
+              </Link>
+            )}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="text-gray-700 hover:text-blue-600 transition-colors"
@@ -92,13 +109,24 @@ export function Navigation() {
             </button>
           </div>
 
-          {/* Desktop Join Us button */}
-          <Link
-            href="/signup"
-            className="hidden md:block bg-blue-600 text-white px-3 py-2 text-sm rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            Join Us
-          </Link>
+          {/* Desktop Auth/Join button */}
+          {authInfo?.isAuthenticated ? (
+            <Link
+              href="/admin"
+              className="hidden md:flex items-center gap-2 bg-green-100 text-green-700 px-4 py-2 text-sm rounded-lg hover:bg-green-200 transition-colors"
+            >
+              <User className="w-4 h-4" />
+              <span className="font-medium">{authInfo.email || 'Admin'}</span>
+              <Shield className="w-4 h-4" />
+            </Link>
+          ) : (
+            <Link
+              href="/signup"
+              className="hidden md:block bg-blue-600 text-white px-3 py-2 text-sm rounded-lg hover:bg-blue-700 transition-colors"
+            >
+              Join Us
+            </Link>
+          )}
         </div>
 
         {/* Mobile menu */}
